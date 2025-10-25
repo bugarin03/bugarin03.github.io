@@ -7,10 +7,10 @@
 
   <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;';>
       <a-assets>
-          <audio id="sound" src="audio.mp3" preload="auto"></audio>
+          <audio id="sound" src="assets/quack.mp3" preload="auto"></audio>
       </a-assets>
       <a-marker preset="hiro">
-              <a-box position='0 0.5 0' material='color: black;' soundhandler> 
+              <a-box position='0 0.5 0' material='opacity: 0.5;' soundhandler> 
               </a-box>
       </a-marker>
       <a-entity sound="src: #sound" autoplay="false"></a-entity>
