@@ -1,25 +1,55 @@
 window.addEventListener("DOMContentLoaded", () => {
   const infoBox = document.getElementById("marker-info");
+  const soundPlayer = document.getElementById("sound-player");
 
-  const markerDescriptions = {
-    "marker-nest1": "Encontraste el mapa! Como veras, la comunidad de universidades católicas es vasta, y sus fundaciones también. Dentro del contexto de las universidades del mundo, la nuestra es bastante reciente, sobretodo cuando la comparamos con universidades que vienen activas desde el 1900. Pero hemos logrado mucho en estos años. Recuerdo haber visto una placa conmemorativa por algun lado...",
-    "marker-nest2": "Esta placa muestra los 25 años de la UCU, y con ella, deberíamos mirar un poco hacia atrás. En este momento, el edificio central era lo único que había, y los edificios de Salto y Punta del Este no tenían más de 10 años.Hoy en día, la expansión de la universidad es tal que hay un círculo de edificios por esta zona. Pero suficiente del pasado, es hora de mirar al presente, y qué mejor lugar que donde se celebraron los 40 años! Ve, toma un poco de aire y disfruta de una de las piezas de arte más grandes que ofrece la universidad.",
-    "marker-nest3": "Y ahora, a por muchos años más! Gracias por jugar nuestra cacería!",
-  };
+  const sequence = [
+    {
+      id: "marker-nest1",
+      text: "Encontraste el mapa! Como verás, la comunidad de universidades católicas es vasta...",
+    },
+    {
+      id: "marker-nest2",
+      text: "Esta placa muestra los 25 años de la UCU... hora de mirar al presente.",
+    },
+    {
+      id: "marker-nest3",
+      text: "Y ahora, a por muchos años más! Gracias por jugar nuestra cacería!",
+    },
+  ];
 
-  const markers = Object.keys(markerDescriptions);
+  let currentStep = 0;
+  let completed = new Set();
 
-  markers.forEach((id) => {
-    const marker = document.getElementById(id);
+  function advanceToStep(stepIndex) {
+    const step = sequence[stepIndex];
+    infoBox.textContent = step.text;
 
-    // Cuando el marcador se detecta
+    // reproducir sonido al avanzar
+    if (soundPlayer && soundPlayer.components && soundPlayer.components.sound) {
+      soundPlayer.components.sound.playSound();
+    }
+
+    currentStep = stepIndex;
+    completed.add(step.id);
+  }
+
+  sequence.forEach((step, index) => {
+    const marker = document.getElementById(step.id);
+    if (!marker) return;
+
     marker.addEventListener("markerFound", () => {
-      infoBox.textContent = markerDescriptions[id];
+      // sólo avanza si es el paso correcto
+      if (index === currentStep && !completed.has(step.id)) {
+        advanceToStep(index);
+      }
     });
 
-    // Cuando el marcador se pierde
     marker.addEventListener("markerLost", () => {
-      infoBox.textContent = "Escanea un marcador para ver su descripción.";
+      // no hacemos nada al perderlo, para mantener el texto del último paso
     });
   });
+
+  // texto inicial
+  infoBox.textContent =
+    "Bienvenido a la cacería del tesoro de la UCU! Esta cacería está ambientada en la historia de la UCU, que ahora celebra sus 40 años...";
 });

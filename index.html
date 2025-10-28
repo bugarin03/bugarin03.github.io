@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.6.0/dist/aframe-master.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <script src="https://bugarin03.github.io/scripts/main.js" defer></script>
 
     <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
 
-      .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-      }
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
+        }
 
-      /* Acordeón */
-      #accordion {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.75);
-        color: #fff;
-        font-family: sans-serif;
-        padding: 10px;
-        z-index: 10000;
-        border-bottom: 2px solid #f00;
-      }
+        /* Acordeón */
+        #accordion {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            font-family: sans-serif;
+            padding: 10px;
+            z-index: 10000;
+            border-bottom: 2px solid #f00;
+        }
 
-      #accordion summary {
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 1.1em;
-        outline: none;
-      }
+        #accordion summary {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            outline: none;
+        }
 
-      #accordion p {
-        margin: 0.5em 0 0 0;
-        font-size: 0.95em;
-      }
+        #accordion p {
+            margin: 0.5em 0 0 0;
+            font-size: 0.95em;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="arjs-loader">
-      <div>Cargando, por favor espere...</div>
+        <div>Cargando, por favor espere...</div>
     </div>
 
     <!-- Acordeón fijo -->
     <details id="accordion" open>
-      <summary>Pistas</summary>
-      <p id="marker-info">Bienvenido a la cacería del tesoro de la UCU! Esta cacería está ambientada en la historia de la UCU, que ahora celebra sus 40 años. Para empezar, qué mejor que ubicarnos dentro del contexto del resto de universidades católicas. Si tan sólo hubiera algo en estas instalaciones que las mostrase a todas...</p>
+        <summary>Pistas</summary>
+        <p id="marker-info">Bienvenido a la cacería del tesoro de la UCU! Esta cacería está ambientada en la historia de
+            la UCU, que ahora celebra sus 40 años. Para empezar, qué mejor que ubicarnos dentro del contexto del resto
+            de universidades católicas. Si tan sólo hubiera algo en estas instalaciones que las mostrase a todas...</p>
     </details>
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
@@ -76,19 +79,19 @@
             <audio id="marker-sound" src="https://bugarin03.github.io/assets/quack.mp3" preload="auto"></audio>
         </a-assets>
 
-        <a-nft type="nft" url="https://bugarin03.github.io/assets/nest1/nest1" smooth="true" smoothCount="2" smoothTolerance=".001"
-          smoothThreshold="1" minConfidence="0.01">
-            <a-box color="red" scale="50 50 50" position="200 200 0"  material="shader: flat;"></a-box>
+        <a-nft id="marker-nest1" type="nft" url="https://bugarin03.github.io/assets/nest1/nest1" smooth="true"
+            smoothCount="2" smoothTolerance=".001" smoothThreshold="1" minConfidence="0.01">
+            <a-box color="red" scale="50 50 50" position="200 200 0" material="shader: flat;"></a-box>
         </a-nft>
 
-        <a-nft type="nft" url="https://bugarin03.github.io/assets/nest2/nest2" smooth="true" smoothCount="2" smoothTolerance=".001"
-          smoothThreshold="1" minConfidence="0.01">
-            <a-box color="red" scale="50 50 50" position="200 200 0"  material="shader: flat;"></a-box>
+        <a-nft id="marker-nest2" type="nft" url="https://bugarin03.github.io/assets/nest2/nest2" smooth="true"
+            smoothCount="2" smoothTolerance=".001" smoothThreshold="1" minConfidence="0.01">
+            <a-box color="red" scale="50 50 50" position="200 200 0" material="shader: flat;"></a-box>
         </a-nft>
 
-        <a-nft type="nft" url="https://bugarin03.github.io/assets/nest3/nest3" smooth="true" smoothCount="2" smoothTolerance=".001"
-          smoothThreshold="1" minConfidence="0.01">
-            <a-box color="red" scale="50 50 50" position="200 200 0"  material="shader: flat;"></a-box>
+        <a-nft id="marker-nest3" type="nft" url="https://bugarin03.github.io/assets/nest3/nest3" smooth="true"
+            smoothCount="2" smoothTolerance=".001" smoothThreshold="1" minConfidence="0.01">
+            <a-box color="red" scale="50 50 50" position="200 200 0" material="shader: flat;"></a-box>
         </a-nft>
 
         <a-entity sound="src: #marker-sound; autoplay: false; loop: false;" id="sound-player"></a-entity>
@@ -121,22 +124,22 @@
 </script>
 
 <style>
-  .arjs-loader {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-  .arjs-loader div {
-    text-align: center;
-    font-size: 1.25em;
-    color: white;
-  }
+    .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+    }
 </style>
